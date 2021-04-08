@@ -174,14 +174,16 @@ class iniparser {
         string temp, ss;
         regex r("\\s");
         posOfSection = sectionpos.at(sectionNumber(section));
-        for(int i=posOfSection; i<all.size(); i++) {
-            if(all.at(i)[0] != brackets[0] && all.at(i) != "") {
-                ss = all.at(i);
-                ss = regex_replace(ss, r, "");
-                vtemp1 = split(ss, "=");
-                vtemp2.push_back(vtemp1);
+        for(int i=posOfSection+1; i<all.size(); i++) {
+            if(all.at(i) == "")
+                continue;
+            if(all.at(i)[0] == brackets[0])
+                break;
+            ss = all.at(i);
+            ss = regex_replace(ss, r, "");
+            vtemp1 = split(ss, delim);
+            vtemp2.push_back(vtemp1);
             }
-        }
         
         return vtemp2;
     }
